@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyVapers</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    .cart-button {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      z-index: 50;
+    }
+    .cart-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      background: white;
+      box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+      z-index: 50;
+      overflow-y: auto;
+      padding: 1rem;
+      display: none;
+    }
+    .cart-count {
+      background-color: red;
+      color: white;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      padding: 0 0.4rem;
+      position: absolute;
+      top: -0.5rem;
+      right: -0.5rem;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+  <!-- Header -->
+  <header class="bg-black text-white p-4 text-center">
+    <h1 class="text-3xl font-bold">MyVapers</h1>
+    <p>Tu tienda de confianza para vapers de calidad</p>
+    <nav class="mt-4">
+      <a href="#catalogo" class="mx-2 hover:underline">Catálogo</a>
+      <a href="#faq" class="mx-2 hover:underline">Preguntas Frecuentes</a>
+      <a href="#contacto" class="mx-2 hover:underline">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- Catálogo -->
+  <section id="catalogo" class="container mx-auto p-6">
+    <h2 class="text-2xl font-bold mb-4 text-center">Catálogo</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-lg shadow-md p-4 text-center">
+        <img src="elfbar-mango-magic.png" alt="Mango Magic" class="mx-auto h-40 mb-2">
+        <h3 class="font-bold">Vaper Elf Bar Ice King 40k - Mango Magic</h3>
+        <p class="text-gray-600 mb-2">$18.000 CLP</p>
+        <button onclick="agregarAlCarrito('Elf Bar Mango Magic', 18000)" class="bg-green-500 text-white px-4 py-2 rounded">Agregar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preguntas Frecuentes -->
+  <section id="faq" class="bg-white p-6">
+    <h2 class="text-2xl font-bold mb-4 text-center">Preguntas Frecuentes</h2>
+    <div class="max-w-2xl mx-auto space-y-4">
+      <div>
+        <h3 class="font-semibold">¿Qué tipo de vapers venden?</h3>
+        <p>Ofrecemos una amplia variedad de Vapers desechables y recargables, con diferentes sabores, tamaños y marcas reconocidas para adaptarnos a tus gustos y necesidades.</p>
+      </div>
+      <div>
+        <h3 class="font-semibold">¿Los productos tienen garantía?</h3>
+        <p>Sí, todos nuestros productos cuentan con garantía por defectos de fábrica. Si tienes algún inconveniente, contáctanos dentro de los primeros 3 días de tu compra.</p>
+      </div>
+      <div>
+        <h3 class="font-semibold">¿Hacen envíos?</h3>
+        <p>Sí, realizamos envíos a la zona de La Matanza y CABA.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="bg-gray-200 p-6 text-center">
+    <h2 class="text-2xl font-bold mb-4">Contacto</h2>
+    <p>Si tienes dudas o quieres hacer un pedido, escríbenos a:</p>
+    <p class="text-blue-600 font-semibold">myvapers4@gmail.com</p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black text-white text-center py-4">
+    © 2025 MyVapers. Todos los derechos reservados.
+  </footer>
+
+  <!-- Botón flotante para ver el carrito -->
+  <button onclick="mostrarCarrito()" class="cart-button bg-green-600 text-white px-4 py-2 rounded-full shadow relative">
+    🛒 Ver carrito <span id="cartCount" class="cart-count hidden">0</span>
+  </button>
+
+  <!-- Panel del carrito -->
+  <div id="cartPanel" class="cart-panel">
+    <h2 class="text-2xl font-bold mb-4">Carrito de Compras</h2>
+    <ul id="cartItems" class="mb-4"></ul>
+    <p class="text-xl font-semibold mb-4">Total: $<span id="cartTotal">0</span></p>
+    <button onclick="finalizarCompra()" class="bg-green-500 text-white px-4 py-2 rounded w-full mb-2">Finalizar compra (WhatsApp)</button>
+    <button onclick="cerrarCarrito()" class="bg-red-500 text-white px-4 py-2 rounded w-full">Cerrar</button>
+  </div>
+
+  <script>
+    let carrito = [];
+
+    function actualizarContadorCarrito() {
+      const contador = document.getElementById('cartCount');
+      const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+      if (totalItems > 0) {
+        contador.textContent = totalItems;
+        contador.classList.remove('hidden');
+      } else {
+        contador.classList.add('hidden');
+      }
+    }
+
+    function agregarAlCarrito(nombre, precio) {
+      const producto = carrito.find(item => item.nombre === nombre);
+      if (producto) {
+        producto.cantidad++;
+      } else {
+        carrito.push({ nombre, precio, cantidad: 1 });
+      }
+      alert(`${nombre} agregado al carrito.`);
+      actualizarContadorCarrito();
+    }
+
+    function eliminarDelCarrito(index) {
+      carrito.splice(index, 1);
+      mostrarCarrito();
+      actualizarContadorCarrito();
+    }
+
+    function mostrarCarrito() {
+      const panel = document.getElementById('cartPanel');
+      const lista = document.getElementById('cartItems');
+      const total = document.getElementById('cartTotal');
+      lista.innerHTML = '';
+      let totalPrecio = 0;
+      carrito.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.className = "flex justify-between items-center mb-2";
+        li.innerHTML = `
+          <span>${item.nombre} x${item.cantidad} - $${item.precio * item.cantidad}</span>
+          <button onclick="eliminarDelCarrito(${index})" class="text-red-600 hover:text-red-800 text-sm">Eliminar</button>
+        `;
+        lista.appendChild(li);
+        totalPrecio += item.precio * item.cantidad;
+      });
+      total.textContent = totalPrecio;
+      panel.style.display = 'block';
+    }
+
+    function cerrarCarrito() {
+      document.getElementById('cartPanel').style.display = 'none';
+    }
+
+    function finalizarCompra() {
+      if (carrito.length === 0) {
+        alert('Tu carrito está vacío.');
+        return;
+      }
+      let mensaje = 'Hola, quiero hacer una compra:%0A';
+      let total = 0;
+      carrito.forEach(item => {
+        mensaje += `- ${item.nombre} x${item.cantidad} ($${item.precio * item.cantidad})%0A`;
+        total += item.precio * item.cantidad;
+      });
+      mensaje += `%0ATotal: $${total}`;
+      const telefono = '+54 9 11 2397 3698';
+      const url = `https://wa.me/${telefono}?text=${mensaje}`;
+      window.open(url, '_blank');
+    }
+  </script>
+
+</body>
+</html>
