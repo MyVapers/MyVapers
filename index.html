@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyVapers</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f7f7f7;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #0d0d0d;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #222;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #00bcd4;
+    }
+
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .product {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .product img {
+      max-width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .faq h3 {
+      margin-bottom: 10px;
+    }
+
+    .faq p {
+      margin-bottom: 20px;
+    }
+
+    .contact a {
+      display: inline-block;
+      background-color: #00bcd4;
+      color: white;
+      padding: 12px 25px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    footer {
+      background-color: #0d0d0d;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MyVapers</h1>
+    <p>Tu tienda de confianza para vapers de calidad</p>
+  </header>
+
+  <nav>
+    <a href="#productos">Productos</a>
+    <a href="#faq">Preguntas Frecuentes</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <section id="productos">
+    <h2>Productos</h2>
+    <div class="products">
+      <!-- Puedes duplicar este bloque para más productos -->
+      <div class="product">
+        <img src="https://via.placeholder.com/250x180" alt="Vaper 1" />
+        <h3>Vaper Desechable - Mango Ice</h3>
+        <p>$12.000 CLP</p>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/250x180" alt="Vaper 2" />
+        <h3>Vaper Recargable - Blueberry</h3>
+        <p>$18.000 CLP</p>
+      </div>
+      <!-- Agrega más productos aquí -->
+    </div>
+  </section>
+
+  <section id="faq" class="faq">
+    <h2>Preguntas Frecuentes</h2>
+    <h3>¿Qué tipo de vapers venden?</h3>
+    <p>Ofrecemos una amplia variedad de vapers desechables y recargables con diferentes sabores.</p>
+
+    <h3>¿Los productos tienen garantía?</h3>
+    <p>Sí, todos nuestros productos cuentan con garantía por defectos de fábrica por hasta 7 días.</p>
+
+    <h3>¿Hacen envíos?</h3>
+    <p>Sí, realizamos envíos a todo el país. Puedes elegir entre envío estándar o exprés.</p>
+
+    <h3>¿Qué métodos de pago aceptan?</h3>
+    <p>Aceptamos tarjetas, transferencias bancarias y pagos en efectivo en puntos habilitados.</p>
+
+    <h3>¿Necesito ser mayor de edad para comprar?</h3>
+    <p>Sí, debes tener al menos 18 años para adquirir productos de vapeo.</p>
+  </section>
+
+  <section id="contacto" class="contact">
+    <h2>¿Necesitas ayuda?</h2>
+    <p>Haz clic en el botón para contactarnos por correo.</p>
+    <a href="mailto:MyVapers4@gmail.com?subject=Necesito%20ayuda%20con%20el%20soporte%20de%20la%20pagina">Contactar por correo</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 MyVapers. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>
